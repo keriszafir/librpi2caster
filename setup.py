@@ -15,7 +15,7 @@ setup(name='librpi2caster', version=__version__,
       url=__github_url__, author=__author__, author_email=__author_email__,
       license='MIT', zip_safe=True, packages=['librpi2caster'],
       classifiers=['Development Status :: 5 - Production/Stable',
-                   'License :: OSI Approved :: MIT',
+                   'License :: OSI Approved :: MIT License',
                    'Natural Language :: English',
                    'Operating System :: POSIX :: Linux',
                    'Programming Language :: Python :: 3 :: Only'])

@@ -2,10 +2,15 @@
 """librpi2caster - common classes, functions and definitions
 for rpi2caster utility and hardware control daemons"""
 
+from collections import deque
+
 # interface operating modes
 PUNCHING, CASTING = 'punching', 'casting'
 # boolean states and row 16 addressing modes
 ON, OFF, HMN, KMN, UNITSHIFT = True, False, 'HMN', 'KMN', 'unit shift'
+# signals to send to the valves
+OUTPUT_SIGNALS = tuple(['0075', 'S', '0005', *'ABCDEFGHIJKLMN',
+                        *(str(x) for x in range(1, 15)), 'O15'])
 
 
 def parse_signals(input_signals, operation_mode, row16_mode, testing_mode):
@@ -111,6 +116,20 @@ def parse_signals(input_signals, operation_mode, row16_mode, testing_mode):
             # no need for an additional O15
             parsed_signals.discard('O15')
 
+    def formatted_output():
+        """Arrange the signals so that NI, NL will be present at the
+        beginning of the signals collection"""
+        arranged = deque(s for s in OUTPUT_SIGNALS if s in parsed_signals)
+        # put NI, NL, NK, NJ, NKJ etc. at the front
+        if 'N' in arranged:
+            for other in 'JKLI':
+                if other in parsed_signals:
+                    arranged.remove('N')
+                    arranged.remove(other)
+                    arranged.appendleft(other)
+                    arranged.appendleft('N')
+        return list(arranged)
+
     try:
         source = input_signals.upper()
     except AttributeError:
@@ -141,7 +160,7 @@ def parse_signals(input_signals, operation_mode, row16_mode, testing_mode):
     else:
         strip_o15()
     # all ready for sending
-    return parsed_signals
+    return formatted_output()
 
 
 # Exceptions

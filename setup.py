@@ -1,7 +1,7 @@
 """librpi2caster common classes, functions and constants"""
 from setuptools import setup
 
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 __author__ = 'Christophe Slychan'
 __author_email__ = 'krzysztof.slychan@gmail.com'
 __github_url__ = 'http://github.com/elegantandrogyne/librpi2caster'

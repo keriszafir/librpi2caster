@@ -205,7 +205,7 @@ class InterfaceBusy(InterfaceException):
     """the interface was claimed by another client and cannot be used
     until it is released"""
     code = 3
-    message = ('This interface was started and is already in use.\n'
+    message = ('This interface was started and is already in use. '
                'If this is not the case, restart the interface.')
 
 

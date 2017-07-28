@@ -176,38 +176,40 @@ class InterfaceException(Exception):
 class MachineStopped(InterfaceException):
     """machine not turning exception"""
     code = 0
-    name = 'machine stopped'
+    message = 'Machine stopped'
 
 
 class UnsupportedMode(InterfaceException):
     """The operation mode is not supported by this interface."""
     code = 1
-    name = 'unsupported operation mode'
+    message = ('Unsupported operation mode: {}'
+               .format(self.offending_value))
 
 
 class UnsupportedRow16Mode(InterfaceException):
     """The row 16 addressing mode is not supported by this interface."""
     code = 2
-    name = 'unsupported row 16 addressing mode'
+    message = ('Unsupported row 16 addressing mode: {}'
+               .format(self.offending_value))
 
 
 class InterfaceBusy(InterfaceException):
     """the interface was claimed by another client and cannot be used
     until it is released"""
     code = 3
-    name = 'interface already in use'
+    message = 'Interface already in use'
 
 
 class InterfaceNotStarted(InterfaceException):
     """the interface was not started and cannot accept signals"""
     code = 4
-    name = 'interface not initialized'
+    message = 'Interface not initialized'
 
 
 class ConfigurationError(InterfaceException):
     """configuration error: wrong name or cannot import module"""
     code = 5
-    name = 'hardware configuration error'
+    message = 'Hardware configuration error'
 
 
 class CommunicationError(InterfaceException):

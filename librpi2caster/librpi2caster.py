@@ -71,4 +71,4 @@ class CommunicationError(InterfaceException):
         if message is not None:
             kwargs.pop('message')
             self.message = message
-        super().__init__(*args, **kwargs)
+        return super().__init__(*args, **kwargs)

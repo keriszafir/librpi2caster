@@ -65,3 +65,10 @@ class CommunicationError(InterfaceException):
     code = 6
     message = ('Cannot communicate with the interface. '
                'Check the network connection and/or configuration.')
+
+    def __init__(self, *args, **kwargs):
+        message = kwargs.get('message')
+        if message is not None:
+            kwargs.pop('message')
+            self.message = message
+        super().__init__(*args, **kwargs)

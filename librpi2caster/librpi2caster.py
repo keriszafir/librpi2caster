@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
 """librpi2caster - common classes, functions and definitions
 for rpi2caster utility and hardware control daemons"""
+from contextlib import suppress
 
 
 class InterfaceException(Exception):
     """Base class for interface-related exceptions"""
     message = 'General interface error.'
     offending_value = ''
+
+    def __init__(self, *args, **kwargs):
+        with suppress(KeyError):
+            self.message = kwargs.pop('message')
+        with suppress(KeyError):
+            self.offending_value = kwargs.pop('offending_value')
+        return super().__init__(*args, **kwargs)
 
     def __str__(self):
         return self.message
@@ -65,10 +73,3 @@ class CommunicationError(InterfaceException):
     code = 6
     message = ('Cannot communicate with the interface. '
                'Check the network connection and/or configuration.')
-
-    def __init__(self, *args, **kwargs):
-        message = kwargs.get('message')
-        if message is not None:
-            kwargs.pop('message')
-            self.message = message
-        return super().__init__(*args, **kwargs)

@@ -2,9 +2,9 @@
 from setuptools import setup
 
 __version__ = '2.0.3'
-__author__ = 'Christophe Catherine Slychan'
-__author_email__ = 'krzysztof.slychan@gmail.com'
-__github_url__ = 'http://github.com/elegantandrogyne/librpi2caster'
+__author__ = 'Keri Szafir'
+__author_email__ = 'keri.szafir@gmail.com'
+__github_url__ = 'http://github.com/keriszafir/librpi2caster'
 
 with open('README.rst', 'r') as readme_file:
     long_description = readme_file.read()
